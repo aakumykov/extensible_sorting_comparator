@@ -4,7 +4,7 @@ import android.util.Log
 import com.github.aakumykov.kotlin_playground.SortingMode
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 
-abstract class AbcComparator : Comparator<FSItem> {
+abstract class FSItemComparator : Comparator<FSItem> {
 
     abstract fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int
 
@@ -25,25 +25,25 @@ abstract class AbcComparator : Comparator<FSItem> {
     }
 
 
-    class NameComparator : AbcComparator() {
+    class NameComparator : FSItemComparator() {
         override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int {
             return item1.name.compareTo(item2.name)
         }
     }
 
-    class SizeComparator : AbcComparator() {
+    class SizeComparator : FSItemComparator() {
         override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int {
             return item1.size.compareTo(item2.size)
         }
     }
 
-    class DummyComparator : AbcComparator() {
+    class DummyComparator : FSItemComparator() {
         override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int = 0
     }
 
 
     companion object {
-        fun create(sortingMode: SortingMode): AbcComparator {
+        fun create(sortingMode: SortingMode): FSItemComparator {
             return when(sortingMode) {
                 SortingMode.NAME -> NameComparator()
                 SortingMode.SIZE -> SizeComparator()

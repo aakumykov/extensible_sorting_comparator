@@ -6,7 +6,14 @@ import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 
 abstract class AbcComparator : Comparator<FSItem> {
 
-    protected fun compareWithNull(item1: FSItem?, item2: FSItem?): Int {
+    abstract fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int
+
+    override fun compare(o1: FSItem?, o2: FSItem?): Int {
+        return if (null != o1 && null != o2) compareItemsByProperty(o1, o2)
+        else compareWithNull(o1, o2)
+    }
+
+    private fun compareWithNull(item1: FSItem?, item2: FSItem?): Int {
         return when {
             (null == item1) -> 1
             (null == item2) -> -1
@@ -17,26 +24,21 @@ abstract class AbcComparator : Comparator<FSItem> {
         }
     }
 
+
     class NameComparator : AbcComparator() {
-        override fun compare(o1: FSItem?, o2: FSItem?): Int {
-            return if (null == o1 || null == o2) compareWithNull(o1,o2)
-            else {
-                o1.name.compareTo(o2.name)
-            }
+        override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int {
+            return item1.name.compareTo(item2.name)
         }
     }
 
     class SizeComparator : AbcComparator() {
-        override fun compare(o1: FSItem?, o2: FSItem?): Int {
-            return if (null == o1 || null == o2) compareWithNull(o1,o2)
-            else {
-                o1.size.compareTo(o2.size)
-            }
+        override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int {
+            return item1.size.compareTo(item2.size)
         }
     }
 
     class DummyComparator : AbcComparator() {
-        override fun compare(o1: FSItem?, o2: FSItem?): Int = 0
+        override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int = 0
     }
 
 

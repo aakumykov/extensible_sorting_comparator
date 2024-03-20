@@ -25,13 +25,10 @@ class MainActivity : AppCompatActivity() {
             LogD(it.toString())
             it
         }.also {
-            LogD("name: "+it.sortedWith(
-                FSItemComparator.create(SortingMode.NAME)
-            ).toString())
-
-            LogD("size: "+it.sortedWith(
-                FSItemComparator.create(SortingMode.SIZE)
-            ).toString())
+            LogD("name d: "+it.sortedWith(FSItemComparator.create(SortingMode.NAME)).toString())
+            LogD("name r: "+it.sortedWith(FSItemComparator.create(SortingMode.NAME, true)).toString())
+            LogD("size d: "+it.sortedWith(FSItemComparator.create(SortingMode.SIZE)).toString())
+            LogD("size r: "+it.sortedWith(FSItemComparator.create(SortingMode.SIZE, true)).toString())
         }
     }
 

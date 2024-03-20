@@ -4,12 +4,17 @@ import android.util.Log
 import com.github.aakumykov.kotlin_playground.SortingMode
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 
-abstract class FSItemComparator : Comparator<FSItem> {
+abstract class FSItemComparator(private val reverseOrder: Boolean) : Comparator<FSItem> {
 
-    abstract fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int
+    abstract fun compareItemsByProperty(item1: FSItem, item2: FSItem, reverseOrder: Boolean): Int
 
     override fun compare(o1: FSItem?, o2: FSItem?): Int {
-        return if (null != o1 && null != o2) compareItemsByProperty(o1, o2)
+        return if (null != o1 && null != o2) {
+            compareItemsByProperty(o1, o2, reverseOrder).let {
+                if (reverseOrder) it * -1
+                else it
+            }
+        }
         else compareWithNull(o1, o2)
     }
 
@@ -18,36 +23,37 @@ abstract class FSItemComparator : Comparator<FSItem> {
             (null == item1) -> 1
             (null == item2) -> -1
             else -> {
-                Log.e(BasicComparator.TAG, "At least one argument must be null for this method. Comparision of two non-null arguments not supported!")
+                Log.e(TAG, "At least one argument must be null for this method. Comparision of two non-null arguments not supported!")
                 return 0
             }
         }
     }
 
 
-    class NameComparator : FSItemComparator() {
-        override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int {
+    class NameComparator(reverseOrder: Boolean) : FSItemComparator(reverseOrder) {
+        override fun compareItemsByProperty(item1: FSItem, item2: FSItem, reverseOrder: Boolean): Int {
             return item1.name.compareTo(item2.name)
         }
     }
 
-    class SizeComparator : FSItemComparator() {
-        override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int {
+    class SizeComparator(reverseOrder: Boolean) : FSItemComparator(reverseOrder) {
+        override fun compareItemsByProperty(item1: FSItem, item2: FSItem, reverseOrder: Boolean): Int {
             return item1.size.compareTo(item2.size)
         }
     }
 
-    class DummyComparator : FSItemComparator() {
-        override fun compareItemsByProperty(item1: FSItem, item2: FSItem): Int = 0
+    class DummyComparator(reverseOrder: Boolean) : FSItemComparator(reverseOrder) {
+        override fun compareItemsByProperty(item1: FSItem, item2: FSItem, reverseOrder: Boolean): Int = 0
     }
 
 
     companion object {
-        fun create(sortingMode: SortingMode): FSItemComparator {
+        val TAG: String = FSItemComparator::class.java.simpleName
+        fun create(sortingMode: SortingMode, reverseOrder: Boolean = false): FSItemComparator {
             return when(sortingMode) {
-                SortingMode.NAME -> NameComparator()
-                SortingMode.SIZE -> SizeComparator()
-                else -> DummyComparator()
+                SortingMode.NAME -> NameComparator(reverseOrder)
+                SortingMode.SIZE -> SizeComparator(reverseOrder)
+                else -> DummyComparator(reverseOrder)
             }
         }
     }

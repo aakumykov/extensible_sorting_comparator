@@ -5,7 +5,7 @@ import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 import com.github.aakumykov.kotlin_playground.simple_comparator.NameSortingComparator
 
 class FSItemComparatorFactory {
-    companion object {
+    /*companion object {
         fun comparator(sortingMode: SortingMode): Comparator<in FSItem> {
             return when(sortingMode) {
                 SortingMode.NAME -> FSItemNameComparator()
@@ -13,5 +13,5 @@ class FSItemComparatorFactory {
                 else -> FSItemDummyComparator()
             }
         }
-    }
+    }*/
 }

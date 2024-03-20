@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.extensions.LogD
+import com.github.aakumykov.kotlin_playground.object_comparator.AbcComparator
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.object_comparator.FSItemComparatorFactory
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FileItem
@@ -27,7 +28,13 @@ class MainActivity : AppCompatActivity() {
             LogD(it.toString())
             it
         }.also {
-            LogD(it.sortedWith(FSItemComparatorFactory.comparator(SortingMode.NAME)).toString())
+            LogD("name: "+it.sortedWith(
+                AbcComparator.create(SortingMode.NAME)
+            ).toString())
+
+            LogD("size: "+it.sortedWith(
+                AbcComparator.create(SortingMode.SIZE)
+            ).toString())
         }
     }
 

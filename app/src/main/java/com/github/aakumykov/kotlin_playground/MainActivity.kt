@@ -17,7 +17,9 @@ class MainActivity : AppCompatActivity() {
             DirItem("Папка 1"),
             FileItem("Файл Б", 4),
             FileItem("Файл А", 3),
-            DirItem("Папка 2")
+            DirItem("Папка 2"),
+            DirItem("А"),
+            FileItem("А",5)
         )
     }
     private val folderCharacter = "\uD83D\uDCC1"
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isReverseOrder(): Boolean = binding.reverseOrderSwitch.isActivated
+    private fun isReverseOrder(): Boolean = binding.reverseOrderSwitch.isChecked
 
     private fun isFoldersFirst(): Boolean = binding.foldersFirstSwitch.isChecked
 

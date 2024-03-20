@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground
+package com.github.aakumykov.kotlin_playground.simple_comparator
 
 abstract class SortingComparator<T: Comparable<T>> : Comparator<T> {
     override fun compare(o1: T, o2: T): Int {

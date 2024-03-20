@@ -1,4 +1,6 @@
-package com.github.aakumykov.kotlin_playground
+package com.github.aakumykov.kotlin_playground.simple_comparator
+
+import com.github.aakumykov.kotlin_playground.SortingMode
 
 class ComparatorFactory {
     companion object {

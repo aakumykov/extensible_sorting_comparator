@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         return when(binding.sortingModeGroup.checkedRadioButtonId) {
             R.id.sortByName -> SortingMode.NAME
             R.id.sortBySize -> SortingMode.SIZE
+            R.id.sortByTime -> SortingMode.TIME
             else -> SortingMode.UNSORTED
         }
     }

@@ -33,6 +33,12 @@
             android:layout_height="wrap_content"
             android:text="Размеру" />
 
+        <RadioButton
+            android:id="@+id/sortByTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Времени" />
+
         <Switch
             android:id="@+id/foldersFirstSwitch"
             android:layout_width="match_parent"

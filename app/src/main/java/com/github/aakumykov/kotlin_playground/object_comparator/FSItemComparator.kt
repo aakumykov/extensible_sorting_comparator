@@ -18,8 +18,8 @@ abstract class FSItemComparator(
             compareWithNull(o1, o2)
         } else {
             when {
-                (foldersFirst && o1.isDir && !o2.isDir) -> 1
-                (foldersFirst && !o1.isDir && o2.isDir) -> -1
+                (foldersFirst && o1.isDir && !o2.isDir) -> -1
+                (foldersFirst && !o1.isDir && o2.isDir) -> 1
                 else -> compareItemsByProperty(o1,o2)
             }.let {
                 if (reverseOrder) it * -1

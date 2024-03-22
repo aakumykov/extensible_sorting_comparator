@@ -10,7 +10,7 @@ abstract class FSItemComparator(
 )
     : Comparator<FSItem>
 {
-    abstract fun compareAsFiles(item1: FSItem, item2: FSItem): Int
+    abstract fun compareFSItems(item1: FSItem, item2: FSItem): Int
 
     /**
      * Главный метод.
@@ -21,22 +21,43 @@ abstract class FSItemComparator(
             return compareWithNull(o1, o2)
 
         return when {
-//                (foldersFirst && o1.isDir && o2.isDir) -> compareAsDirs(o1 as DirItem, o2 as DirItem)
-            (foldersFirst && o1.isDir && !o2.isDir) -> -1
-            (foldersFirst && !o1.isDir && o2.isDir) -> 1
-            else -> compareAsFilesWrapper(o1,o2)
+            (o1.isDir && !o2.isDir) -> compareDirWithFile(o1,o2)
+            (!o1.isDir && o2.isDir) -> compareFileWithDir(o1,o2)
+            else -> compareCommon(o1,o2)
         }
     }
 
-    private fun compareAsFilesWrapper(o1: FSItem, o2: FSItem): Int {
-        return compareAsFiles(o1, o2).let {
-            if (o1.isDir && o2.isDir) it
-            else it * reverseMultiplier()
-        }
+
+    private fun compareDirWithFile(dir: FSItem, file: FSItem): Int {
+        return if (foldersFirst) return -1
+        else compareCommon(dir,file)
+    }
+
+    private fun compareFileWithDir(file: FSItem, dir: FSItem): Int {
+        return if (foldersFirst) 1
+        else compareCommon(file,dir)
+    }
+
+    private fun compareCommon(fsItem1: FSItem, fsItem2: FSItem): Int {
+        return compareFSItems(fsItem1, fsItem2).let {
+            if (reverseOrder) it * reverseMultiplier()
+            else it
+        }/*.let {
+            it * dirMultiplier(fsItem1, fsItem2)
+        }*/
     }
 
 
     private fun reverseMultiplier(): Int = if (reverseOrder) -1 else 1
+
+
+    /*private fun dirMultiplier(item1: FSItem, item2: FSItem): Int {
+        return when {
+            (item1.isDir && !item2.isDir) -> -1
+            (!item1.isDir && item2.isDir) -> 1
+            else -> 0
+        }
+    }*/
 
 
     private fun compareWithNull(item1: FSItem?, item2: FSItem?): Int {
@@ -53,25 +74,25 @@ abstract class FSItemComparator(
 
 
     class NameComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
-        override fun compareAsFiles(item1: FSItem, item2: FSItem): Int {
+        override fun compareFSItems(item1: FSItem, item2: FSItem): Int {
             return item1.name.compareTo(item2.name)
         }
     }
 
     class SizeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
-        override fun compareAsFiles(item1: FSItem, item2: FSItem): Int {
+        override fun compareFSItems(item1: FSItem, item2: FSItem): Int {
             return item1.size.compareTo(item2.size)
         }
     }
 
     class TimeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
-        override fun compareAsFiles(item1: FSItem, item2: FSItem): Int {
+        override fun compareFSItems(item1: FSItem, item2: FSItem): Int {
             return item1.time.compareTo(item2.time)
         }
     }
 
     class DummyComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
-        override fun compareAsFiles(item1: FSItem, item2: FSItem): Int = 0
+        override fun compareFSItems(item1: FSItem, item2: FSItem): Int = 0
     }
 
 

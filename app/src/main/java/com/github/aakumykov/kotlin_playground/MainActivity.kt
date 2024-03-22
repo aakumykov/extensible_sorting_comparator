@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
             FileItem("Файл Б", 4),
             FileItem("Файл А", 3),
             DirItem("Папка 2"),
-            DirItem("А"),
-            FileItem("А",5)
+            DirItem("А1"),
+            FileItem("А2",5)
         )
     }
     private val folderCharacter = "\uD83D\uDCC1"

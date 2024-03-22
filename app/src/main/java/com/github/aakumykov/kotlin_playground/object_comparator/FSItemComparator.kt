@@ -5,8 +5,8 @@ import com.github.aakumykov.kotlin_playground.SortingMode
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 
 abstract class FSItemComparator(
-    private val reverseOrder: Boolean,
-    private val foldersFirst: Boolean
+    protected val reverseOrder: Boolean,
+    protected val foldersFirst: Boolean
 )
     : Comparator<FSItem>
 {
@@ -21,8 +21,8 @@ abstract class FSItemComparator(
             return compareWithNull(o1, o2)
 
         return when {
-            (o1.isDir && !o2.isDir) -> compareDirWithFile(o1,o2)
-            (!o1.isDir && o2.isDir) -> compareFileWithDir(o1,o2)
+            dirIsFirst(o1,o2) -> compareDirWithFile(o1,o2)
+            dirIsSecond(o1,o2) -> compareFileWithDir(o1,o2)
             else -> compareCommon(o1,o2)
         }
     }
@@ -81,7 +81,10 @@ abstract class FSItemComparator(
 
     class SizeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
         override fun compareFSItems(item1: FSItem, item2: FSItem): Int {
-            return item1.size.compareTo(item2.size)
+            return if (bothIsDir(item1, item2))
+                NameComparator(reverseOrder,foldersFirst).compare(item1,item2)
+            else
+                item1.size.compareTo(item2.size)
         }
     }
 
@@ -96,6 +99,10 @@ abstract class FSItemComparator(
     }
 
 
+
+    protected fun bothIsDir(item1: FSItem, item2: FSItem): Boolean = item1.isDir && item2.isDir
+    private fun dirIsFirst(item1: FSItem, item2: FSItem): Boolean = item1.isDir && !item2.isDir
+    private fun dirIsSecond(item1: FSItem, item2: FSItem): Boolean = !item1.isDir && item2.isDir
 
     companion object {
         val TAG: String = FSItemComparator::class.java.simpleName

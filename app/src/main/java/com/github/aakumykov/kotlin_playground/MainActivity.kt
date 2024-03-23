@@ -3,7 +3,7 @@ package com.github.aakumykov.kotlin_playground
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
-import com.github.aakumykov.kotlin_playground.object_comparator.FSItemComparator
+import com.github.aakumykov.kotlin_playground.object_comparator.SortingComparator
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FileItem
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sortAndDisplayList() {
-        list.sortedWith(FSItemComparator.create(
+        list.sortedWith(SortingComparator.create(
             sortingMode(),
             isReverseOrder(),
             isFoldersFirst()

@@ -4,7 +4,7 @@ import android.util.Log
 import com.github.aakumykov.kotlin_playground.SortingMode
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 
-abstract class FSItemComparator(
+abstract class SortingComparator(
     protected val reverseOrder: Boolean,
     protected val foldersFirst: Boolean
 )
@@ -73,13 +73,13 @@ abstract class FSItemComparator(
 
 
 
-    class NameComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
+    class NameComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
         override fun compareFSItems(item1: FSItem, item2: FSItem): Int {
             return item1.name.compareTo(item2.name)
         }
     }
 
-    class SizeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
+    class SizeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
         override fun compareFSItems(item1: FSItem, item2: FSItem): Int {
             return if (bothIsDir(item1, item2))
                 NameComparator(reverseOrder,foldersFirst).compare(item1,item2)
@@ -88,13 +88,13 @@ abstract class FSItemComparator(
         }
     }
 
-    class TimeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
+    class TimeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
         override fun compareFSItems(item1: FSItem, item2: FSItem): Int {
             return item1.time.compareTo(item2.time)
         }
     }
 
-    class DummyComparator(reverseOrder: Boolean, foldersFirst: Boolean) : FSItemComparator(reverseOrder, foldersFirst) {
+    class DummyComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
         override fun compareFSItems(item1: FSItem, item2: FSItem): Int = 0
     }
 
@@ -105,8 +105,8 @@ abstract class FSItemComparator(
     private fun dirIsSecond(item1: FSItem, item2: FSItem): Boolean = !item1.isDir && item2.isDir
 
     companion object {
-        val TAG: String = FSItemComparator::class.java.simpleName
-        fun create(sortingMode: SortingMode, reverseOrder: Boolean = false, foldersFirst: Boolean = true): FSItemComparator {
+        val TAG: String = SortingComparator::class.java.simpleName
+        fun create(sortingMode: SortingMode, reverseOrder: Boolean = false, foldersFirst: Boolean = true): SortingComparator {
             return when(sortingMode) {
                 SortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
                 SortingMode.SIZE -> SizeComparator(reverseOrder, foldersFirst)

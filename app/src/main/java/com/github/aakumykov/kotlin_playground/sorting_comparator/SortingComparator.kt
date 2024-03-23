@@ -32,7 +32,7 @@ abstract class SortingComparator(
             (null == item1) -> 1
             (null == item2) -> -1
             else -> {
-                Log.e(TAG, "At least one argument must be null for this method. Comparision of two non-null arguments not supported!")
+                Log.e(TAG, "One or both arguments of method must be null (arg1.name: ${item1.name}, arg2.name: ${item2.name}")
                 return 0
             }
         }
@@ -97,14 +97,5 @@ abstract class SortingComparator(
 
     companion object {
         val TAG: String = SortingComparator::class.java.simpleName
-
-        fun create(comparatorSortingMode: ComparatorSortingMode, reverseOrder: Boolean = false, foldersFirst: Boolean = true): SortingComparator {
-            return when(comparatorSortingMode) {
-                ComparatorSortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
-                ComparatorSortingMode.SIZE -> SizeComparator(reverseOrder, foldersFirst)
-                ComparatorSortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)
-                else -> DummyComparator(reverseOrder, foldersFirst)
-            }
-        }
     }
 }

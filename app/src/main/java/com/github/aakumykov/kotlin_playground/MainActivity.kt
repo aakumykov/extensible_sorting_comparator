@@ -56,12 +56,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun sortingMode(): SortingMode {
+    private fun sortingMode(): ComparatorSortingMode {
         return when(binding.sortingModeGroup.checkedRadioButtonId) {
-            R.id.sortByName -> SortingMode.NAME
-            R.id.sortBySize -> SortingMode.SIZE
-            R.id.sortByTime -> SortingMode.TIME
-            else -> SortingMode.UNSORTED
+            R.id.sortByName -> ComparatorSortingMode.NAME
+            R.id.sortBySize -> ComparatorSortingMode.SIZE
+            R.id.sortByTime -> ComparatorSortingMode.TIME
+            else -> ComparatorSortingMode.UNSORTED
         }
     }
 

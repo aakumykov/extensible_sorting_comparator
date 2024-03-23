@@ -1,7 +1,7 @@
 package com.github.aakumykov.kotlin_playground.object_comparator
 
 import android.util.Log
-import com.github.aakumykov.kotlin_playground.SortingMode
+import com.github.aakumykov.kotlin_playground.ComparatorSortingMode
 import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
 
 abstract class SortingComparator(
@@ -106,11 +106,11 @@ abstract class SortingComparator(
 
     companion object {
         val TAG: String = SortingComparator::class.java.simpleName
-        fun create(sortingMode: SortingMode, reverseOrder: Boolean = false, foldersFirst: Boolean = true): SortingComparator {
-            return when(sortingMode) {
-                SortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
-                SortingMode.SIZE -> SizeComparator(reverseOrder, foldersFirst)
-                SortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)
+        fun create(comparatorSortingMode: ComparatorSortingMode, reverseOrder: Boolean = false, foldersFirst: Boolean = true): SortingComparator {
+            return when(comparatorSortingMode) {
+                ComparatorSortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
+                ComparatorSortingMode.SIZE -> SizeComparator(reverseOrder, foldersFirst)
+                ComparatorSortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)
                 else -> DummyComparator(reverseOrder, foldersFirst)
             }
         }

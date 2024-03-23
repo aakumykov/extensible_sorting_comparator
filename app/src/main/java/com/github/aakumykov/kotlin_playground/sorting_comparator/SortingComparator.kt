@@ -1,8 +1,7 @@
-package com.github.aakumykov.kotlin_playground.object_comparator
+package com.github.aakumykov.kotlin_playground.sorting_comparator
 
 import android.util.Log
-import com.github.aakumykov.kotlin_playground.ComparatorSortingMode
-import com.github.aakumykov.kotlin_playground.object_comparator.fs_items.FSItem
+import com.github.aakumykov.kotlin_playground.sorting_comparator.fs_items.FSItem
 
 abstract class SortingComparator(
     protected val reverseOrder: Boolean,

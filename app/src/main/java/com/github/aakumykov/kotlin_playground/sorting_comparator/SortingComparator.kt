@@ -1,6 +1,10 @@
 package com.github.aakumykov.kotlin_playground.sorting_comparator
 
 import android.util.Log
+import com.github.aakumykov.kotlin_playground.comparators.DummyComparator
+import com.github.aakumykov.kotlin_playground.comparators.NameComparator
+import com.github.aakumykov.kotlin_playground.comparators.SizeComparator
+import com.github.aakumykov.kotlin_playground.comparators.TimeComparator
 
 abstract class SortingComparator(
     protected val reverseOrder: Boolean,
@@ -70,6 +74,17 @@ abstract class SortingComparator(
 
 
     companion object {
+
         val TAG: String = SortingComparator::class.java.simpleName
+
+        fun createBuiltIn(sortingMode: ComparatorSortingMode, reverseMode: Boolean, foldersFirst: Boolean): java.util.Comparator<in SortableItem> {
+            return when(sortingMode) {
+                ComparatorSortingMode.NAME -> NameComparator(reverseMode,foldersFirst)
+                ComparatorSortingMode.SIZE -> SizeComparator(reverseMode,foldersFirst)
+                ComparatorSortingMode.TIME -> TimeComparator(reverseMode,foldersFirst)
+                else -> DummyComparator()
+            }
+        }
     }
+
 }

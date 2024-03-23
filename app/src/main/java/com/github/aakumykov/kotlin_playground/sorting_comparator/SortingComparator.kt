@@ -62,36 +62,10 @@ abstract class SortingComparator(
     private fun reverseMultiplier(): Int = if (reverseOrder) -1 else 1
 
 
-
-    class NameComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
-        override fun compareSortableItems(item1: SortableItem, item2: SortableItem): Int {
-            return item1.name.compareTo(item2.name)
-        }
-    }
-
-    class SizeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
-        override fun compareSortableItems(item1: SortableItem, item2: SortableItem): Int {
-            return if (bothIsDir(item1, item2))
-                NameComparator(reverseOrder,foldersFirst).compare(item1,item2)
-            else
-                item1.size.compareTo(item2.size)
-        }
-    }
-
-    class TimeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
-        override fun compareSortableItems(item1: SortableItem, item2: SortableItem): Int {
-            return item1.time.compareTo(item2.time)
-        }
-    }
-
-    class DummyComparator(reverseOrder: Boolean, foldersFirst: Boolean) : SortingComparator(reverseOrder, foldersFirst) {
-        override fun compareSortableItems(item1: SortableItem, item2: SortableItem): Int = 0
-    }
-
-
-
     protected fun bothIsDir(item1: SortableItem, item2: SortableItem): Boolean = item1.isDir && item2.isDir
+
     private fun dirIsFirst(item1: SortableItem, item2: SortableItem): Boolean = item1.isDir && !item2.isDir
+
     private fun dirIsSecond(item1: SortableItem, item2: SortableItem): Boolean = !item1.isDir && item2.isDir
 
 

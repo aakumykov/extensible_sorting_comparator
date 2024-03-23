@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.sorting_comparator.ComparatorSortingMode
+import com.github.aakumykov.kotlin_playground.sorting_comparator.NameComparator
 import com.github.aakumykov.kotlin_playground.sorting_comparator.SortableItem
 import com.github.aakumykov.kotlin_playground.sorting_comparator.SortingComparator
 import com.github.aakumykov.kotlin_playground.sorting_comparator.fs_items.DirItem
@@ -40,11 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sortAndDisplayList() {
-        list.sortedWith(SortingComparator.create(
-            sortingMode(),
-            isReverseOrder(),
-            isFoldersFirst()
-        )).also {
+        list.sortedWith(NameComparator(isReverseOrder(), isFoldersFirst())).also {
             binding.textView.text = joinListToString(it)
         }
     }

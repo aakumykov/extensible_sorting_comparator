@@ -2,14 +2,15 @@ package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.github.aakumykov.kotlin_playground.comparators.DummyComparator
+import com.github.aakumykov.kotlin_playground.comparators.NameComparator
+import com.github.aakumykov.kotlin_playground.comparators.SizeComparator
+import com.github.aakumykov.kotlin_playground.comparators.TimeComparator
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
-import com.github.aakumykov.kotlin_playground.sorting_comparator.ComparatorSortingMode
-import com.github.aakumykov.kotlin_playground.sorting_comparator.NameComparator
 import com.github.aakumykov.kotlin_playground.sorting_comparator.SortableItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.SortingComparator
-import com.github.aakumykov.kotlin_playground.sorting_comparator.fs_items.DirItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.fs_items.FSItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.fs_items.FileItem
+import com.github.aakumykov.kotlin_playground.fs_items.DirItem
+import com.github.aakumykov.kotlin_playground.fs_items.FileItem
+import java.util.Comparator
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,8 +42,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sortAndDisplayList() {
-        list.sortedWith(NameComparator(isReverseOrder(), isFoldersFirst())).also {
+        list.sortedWith(
+            sortingComparator(sortingMode(), isReverseOrder(), isFoldersFirst())
+        ).also {
             binding.textView.text = joinListToString(it)
+        }
+    }
+
+    private fun sortingComparator(sortingMode: SortingMode, reverseMode: Boolean, foldersFirst: Boolean): Comparator<in SortableItem> {
+        return when(sortingMode) {
+            SortingMode.NAME -> NameComparator(reverseMode,foldersFirst)
+            SortingMode.SIZE -> SizeComparator(reverseMode,foldersFirst)
+            SortingMode.TIME -> TimeComparator(reverseMode,foldersFirst)
+            else -> DummyComparator(reverseMode,foldersFirst)
         }
     }
 
@@ -55,12 +67,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun sortingMode(): ComparatorSortingMode {
+    private fun sortingMode(): SortingMode {
         return when(binding.sortingModeGroup.checkedRadioButtonId) {
-            R.id.sortByName -> ComparatorSortingMode.NAME
-            R.id.sortBySize -> ComparatorSortingMode.SIZE
-            R.id.sortByTime -> ComparatorSortingMode.TIME
-            else -> ComparatorSortingMode.UNSORTED
+            R.id.sortByName -> SortingMode.NAME
+            R.id.sortBySize -> SortingMode.SIZE
+            R.id.sortByTime -> SortingMode.TIME
+            else -> SortingMode.UNSORTED
         }
     }
 

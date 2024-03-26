@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.fs_items.FileItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.ComparatorSortingMode
 import com.github.aakumykov.kotlin_playground.sorting_comparator.SortableItem
 import com.github.aakumykov.kotlin_playground.sorting_comparator.SortingComparator
 
@@ -55,12 +54,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun sortingMode(): ComparatorSortingMode {
+    private fun sortingMode(): SortingComparator.SortingMode {
         return when(binding.sortingModeGroup.checkedRadioButtonId) {
-            R.id.sortByName -> ComparatorSortingMode.NAME
-            R.id.sortBySize -> ComparatorSortingMode.SIZE
-            R.id.sortByTime -> ComparatorSortingMode.TIME
-            else -> ComparatorSortingMode.UNSORTED
+            R.id.sortByName -> SortingComparator.SortingMode.NAME
+            R.id.sortBySize -> SortingComparator.SortingMode.SIZE
+            R.id.sortByTime -> SortingComparator.SortingMode.TIME
+            else -> SortingComparator.SortingMode.UNSORTED
         }
     }
 

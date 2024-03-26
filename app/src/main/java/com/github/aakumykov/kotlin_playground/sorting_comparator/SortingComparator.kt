@@ -77,14 +77,15 @@ abstract class SortingComparator(
 
         val TAG: String = SortingComparator::class.java.simpleName
 
-        fun createBuiltIn(sortingMode: ComparatorSortingMode, reverseMode: Boolean, foldersFirst: Boolean): java.util.Comparator<in SortableItem> {
+        fun createBuiltIn(sortingMode: SortingMode, reverseMode: Boolean, foldersFirst: Boolean): java.util.Comparator<in SortableItem> {
             return when(sortingMode) {
-                ComparatorSortingMode.NAME -> NameComparator(reverseMode,foldersFirst)
-                ComparatorSortingMode.SIZE -> SizeComparator(reverseMode,foldersFirst)
-                ComparatorSortingMode.TIME -> TimeComparator(reverseMode,foldersFirst)
+                SortingMode.NAME -> NameComparator(reverseMode,foldersFirst)
+                SortingMode.SIZE -> SizeComparator(reverseMode,foldersFirst)
+                SortingMode.TIME -> TimeComparator(reverseMode,foldersFirst)
                 else -> DummyComparator()
             }
         }
     }
 
+    enum class SortingMode { NAME, SIZE, TIME, UNSORTED }
 }

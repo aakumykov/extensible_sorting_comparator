@@ -9,7 +9,7 @@ import com.github.aakumykov.kotlin_playground.comparators.TimeComparator
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.fs_items.FileItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.SortingComparator
+import com.github.aakumykov.kotlin_playground.sorting_comparator.ExtensibleSortingComparator
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun sortingComparator(sortingMode: SortingMode,
                                   reverseOrder: Boolean,
-                                  foldersFirst: Boolean): SortingComparator<SortableFSItem> {
+                                  foldersFirst: Boolean): ExtensibleSortingComparator<SortableFSItem> {
         return when(sortingMode) {
             SortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
             SortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)

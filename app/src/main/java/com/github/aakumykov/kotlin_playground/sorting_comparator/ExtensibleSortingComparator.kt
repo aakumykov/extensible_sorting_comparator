@@ -2,7 +2,7 @@ package com.github.aakumykov.kotlin_playground.sorting_comparator
 
 import android.util.Log
 
-abstract class SortingComparator<T>(
+abstract class ExtensibleSortingComparator<T>(
     protected val reverseOrder: Boolean,
     protected val priorityItemsFirst: Boolean
 )
@@ -66,6 +66,6 @@ abstract class SortingComparator<T>(
 
 
     companion object {
-        val TAG: String = SortingComparator::class.java.simpleName
+        val TAG: String = ExtensibleSortingComparator::class.java.simpleName
     }
 }

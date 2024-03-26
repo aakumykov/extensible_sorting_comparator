@@ -9,7 +9,6 @@ import com.github.aakumykov.kotlin_playground.comparators.TimeComparator
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.fs_items.FileItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.SortableFSItem
 import com.github.aakumykov.kotlin_playground.sorting_comparator.SortingComparator
 
 class MainActivity : AppCompatActivity() {

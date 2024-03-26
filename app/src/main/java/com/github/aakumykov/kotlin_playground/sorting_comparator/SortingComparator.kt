@@ -29,7 +29,7 @@ abstract class SortingComparator<T>(
     }
 
 
-    protected fun bothIsDir(item1: SortableFSItem, item2: SortableFSItem): Boolean = item1.isDir && item2.isDir
+    protected fun bothIsDir(item1: T, item2: T): Boolean = isPriorityItem(item1) && isPriorityItem(item2)
 
 
     private fun compareWithNull(item1: T?, item2: T?): Int {

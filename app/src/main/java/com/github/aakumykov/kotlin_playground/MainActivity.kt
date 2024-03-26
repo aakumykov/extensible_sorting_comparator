@@ -2,6 +2,10 @@ package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.github.aakumykov.kotlin_playground.comparators.DummyComparator
+import com.github.aakumykov.kotlin_playground.comparators.NameComparator
+import com.github.aakumykov.kotlin_playground.comparators.SizeComparator
+import com.github.aakumykov.kotlin_playground.comparators.TimeComparator
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.fs_items.FileItem
@@ -39,9 +43,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun sortAndDisplayList() {
         list.sortedWith(
-            SortingComparator.createBuiltIn(sortingMode(), isReverseOrder(), isFoldersFirst())
+            sortingComparator(sortingMode(), isReverseOrder(), isFoldersFirst())
         ).also {
             binding.textView.text = joinListToString(it)
+        }
+    }
+
+    private fun sortingComparator(sortingMode: SortingMode,
+                                  reverseOrder: Boolean,
+                                  foldersFirst: Boolean): SortingComparator<SortableFSItem> {
+        return when(sortingMode) {
+            SortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
+            SortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)
+            SortingMode.SIZE -> SizeComparator(reverseOrder, foldersFirst)
+            else -> DummyComparator()
         }
     }
 
@@ -54,12 +69,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun sortingMode(): SortingComparator.SortingMode {
+    private fun sortingMode(): SortingMode {
         return when(binding.sortingModeGroup.checkedRadioButtonId) {
-            R.id.sortByName -> SortingComparator.SortingMode.NAME
-            R.id.sortBySize -> SortingComparator.SortingMode.SIZE
-            R.id.sortByTime -> SortingComparator.SortingMode.TIME
-            else -> SortingComparator.SortingMode.UNSORTED
+            R.id.sortByName -> SortingMode.NAME
+            R.id.sortBySize -> SortingMode.SIZE
+            R.id.sortByTime -> SortingMode.TIME
+            else -> SortingMode.UNSORTED
         }
     }
 

@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.fs_items.FileItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.SortableItem
+import com.github.aakumykov.kotlin_playground.sorting_comparator.SortableFSItem
 import com.github.aakumykov.kotlin_playground.sorting_comparator.SortingComparator
 
 class MainActivity : AppCompatActivity() {
 
-    private val list: List<SortableItem> by lazy { listOf(
+    private val list: List<SortableFSItem> by lazy { listOf(
             DirItem("Папка 1"),
             FileItem("Файл Б", 4),
             FileItem("Файл А", 3),
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun joinListToString(list: List<SortableItem>): String {
+    private fun joinListToString(list: List<SortableFSItem>): String {
         return list.joinToString(separator = "\n", transform = { fsItem ->
             fsItem.name.let { name ->
                 if (fsItem.isDir) "$folderCharacter $name"

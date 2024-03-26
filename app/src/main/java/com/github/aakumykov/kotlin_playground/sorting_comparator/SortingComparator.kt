@@ -10,15 +10,15 @@ abstract class SortingComparator(
     protected val reverseOrder: Boolean,
     protected val foldersFirst: Boolean
 )
-    : Comparator<SortableItem>
+    : Comparator<SortableFSItem>
 {
     //
     // Метод реализаций сортировки по разным признакам.
     //
-    abstract fun compareSortableItems(item1: SortableItem, item2: SortableItem): Int
+    abstract fun compareSortableItems(item1: SortableFSItem, item2: SortableFSItem): Int
 
 
-    override fun compare(o1: SortableItem?, o2: SortableItem?): Int {
+    override fun compare(o1: SortableFSItem?, o2: SortableFSItem?): Int {
 
         if (null == o1 || null == o2)
             return compareWithNull(o1, o2)
@@ -31,7 +31,7 @@ abstract class SortingComparator(
     }
 
 
-    private fun compareWithNull(item1: SortableItem?, item2: SortableItem?): Int {
+    private fun compareWithNull(item1: SortableFSItem?, item2: SortableFSItem?): Int {
         return when {
             (null == item1) -> 1
             (null == item2) -> -1
@@ -43,19 +43,19 @@ abstract class SortingComparator(
     }
 
 
-    private fun compareDirWithFile(dir: SortableItem, file: SortableItem): Int {
+    private fun compareDirWithFile(dir: SortableFSItem, file: SortableFSItem): Int {
         return if (foldersFirst) return -1
         else compareOneTypeItems(dir,file)
     }
 
 
-    private fun compareFileWithDir(file: SortableItem, dir: SortableItem): Int {
+    private fun compareFileWithDir(file: SortableFSItem, dir: SortableFSItem): Int {
         return if (foldersFirst) 1
         else compareOneTypeItems(file,dir)
     }
 
 
-    private fun compareOneTypeItems(item1: SortableItem, item2: SortableItem): Int {
+    private fun compareOneTypeItems(item1: SortableFSItem, item2: SortableFSItem): Int {
         return compareSortableItems(item1, item2).let {
             if (reverseOrder) it * reverseMultiplier()
             else it
@@ -66,18 +66,18 @@ abstract class SortingComparator(
     private fun reverseMultiplier(): Int = if (reverseOrder) -1 else 1
 
 
-    protected fun bothIsDir(item1: SortableItem, item2: SortableItem): Boolean = item1.isDir && item2.isDir
+    protected fun bothIsDir(item1: SortableFSItem, item2: SortableFSItem): Boolean = item1.isDir && item2.isDir
 
-    private fun dirIsFirst(item1: SortableItem, item2: SortableItem): Boolean = item1.isDir && !item2.isDir
+    private fun dirIsFirst(item1: SortableFSItem, item2: SortableFSItem): Boolean = item1.isDir && !item2.isDir
 
-    private fun dirIsSecond(item1: SortableItem, item2: SortableItem): Boolean = !item1.isDir && item2.isDir
+    private fun dirIsSecond(item1: SortableFSItem, item2: SortableFSItem): Boolean = !item1.isDir && item2.isDir
 
 
     companion object {
 
         val TAG: String = SortingComparator::class.java.simpleName
 
-        fun createBuiltIn(sortingMode: SortingMode, reverseMode: Boolean, foldersFirst: Boolean): java.util.Comparator<in SortableItem> {
+        fun createBuiltIn(sortingMode: SortingMode, reverseMode: Boolean, foldersFirst: Boolean): java.util.Comparator<in SortableFSItem> {
             return when(sortingMode) {
                 SortingMode.NAME -> NameComparator(reverseMode,foldersFirst)
                 SortingMode.SIZE -> SizeComparator(reverseMode,foldersFirst)

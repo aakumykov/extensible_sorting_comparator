@@ -11,6 +11,6 @@ abstract class SimpleFSItem(
     : FSItem, SortableFSItem
 {
     override fun toString(): String {
-        return this.javaClass.simpleName + " { $name, $size }"
+        return this.javaClass.simpleName + ", \"$name\", $size байт"
     }
 }

@@ -2,17 +2,20 @@ package com.github.aakumykov.kotlin_playground.extensible_sorting_comparator
 
 import android.util.Log
 
-abstract class ExtensibleSortingComparator<T>(
+abstract class ExtensibleSortingComparator<OrdinaryItemType, PriorityItemType: OrdinaryItemType>(
     protected val reverseOrder: Boolean,
     protected val priorityItemsFirst: Boolean
 )
-    : Comparator<T>
+    : Comparator<OrdinaryItemType>
 {
-    abstract fun compareItems(item1: T, item2: T): Int
+    abstract fun compareItems(item1: OrdinaryItemType, item2: OrdinaryItemType): Int
 
-    abstract fun isPriorityItem(item: T): Boolean
+    abstract fun isPriorityItem(item: OrdinaryItemType): Boolean
 
-    override fun compare(o1: T?, o2: T?): Int {
+    abstract fun toPriorityItem(ordinaryItem: OrdinaryItemType): PriorityItemType
+
+
+    override fun compare(o1: OrdinaryItemType?, o2: OrdinaryItemType?): Int {
 
         if (null == o1 || null == o2)
             return compareWithNull(o1, o2)
@@ -26,7 +29,7 @@ abstract class ExtensibleSortingComparator<T>(
 
 
 
-    private fun compareWithNull(item1: T?, item2: T?): Int {
+    private fun compareWithNull(item1: OrdinaryItemType?, item2: OrdinaryItemType?): Int {
         return when {
             (null == item1) -> 1
             (null == item2) -> -1
@@ -38,19 +41,19 @@ abstract class ExtensibleSortingComparator<T>(
     }
 
 
-    private fun comparePriorityAndOrdinaryItem(priorityItem: T, ordinaryItem: T): Int {
+    private fun comparePriorityAndOrdinaryItem(priorityItem: OrdinaryItemType, ordinaryItem: OrdinaryItemType): Int {
         return if (priorityItemsFirst) return -1
         else compareOneTypeItems(priorityItem,ordinaryItem)
     }
 
 
-    private fun compareOrdinaryAndPriorityItem(ordItem: T, prItem: T): Int {
+    private fun compareOrdinaryAndPriorityItem(ordItem: OrdinaryItemType, prItem: OrdinaryItemType): Int {
         return if (priorityItemsFirst) 1
         else compareOneTypeItems(ordItem,prItem)
     }
 
 
-    private fun compareOneTypeItems(item1: T, item2: T): Int {
+    private fun compareOneTypeItems(item1: OrdinaryItemType, item2: OrdinaryItemType): Int {
         return compareItems(item1, item2).let {
             if (reverseOrder) it * reverseMultiplier()
             else it
@@ -60,9 +63,9 @@ abstract class ExtensibleSortingComparator<T>(
 
     private fun reverseMultiplier(): Int = if (reverseOrder) -1 else 1
 
-    private fun priorityItemIsFirst(item1: T, item2: T): Boolean = isPriorityItem(item1) && !isPriorityItem(item2)
+    private fun priorityItemIsFirst(item1: OrdinaryItemType, item2: OrdinaryItemType): Boolean = isPriorityItem(item1) && !isPriorityItem(item2)
 
-    private fun priorityItemIsSecond(item1: T, item2: T): Boolean = !isPriorityItem(item1) && isPriorityItem(item2)
+    private fun priorityItemIsSecond(item1: OrdinaryItemType, item2: OrdinaryItemType): Boolean = !isPriorityItem(item1) && isPriorityItem(item2)
 
 
     companion object {

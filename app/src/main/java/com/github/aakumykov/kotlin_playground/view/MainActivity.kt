@@ -16,11 +16,11 @@ import com.github.aakumykov.kotlin_playground.fsitems_comparators.TimeComparator
 class MainActivity : AppCompatActivity() {
 
     private val list: List<SortableFSItem> by lazy { listOf(
-            DirItem("Папка 1", 0),
+            DirItem("Папка 1"),
             FileItem("Файл Б", 4),
             FileItem("Файл А", 3),
-            DirItem("Папка 2", 10),
-            DirItem("А1", 5),
+            DirItem("Папка 2"),
+            DirItem("А1"),
             FileItem("А2",5)
     )}
 
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun sortingComparator(sortingMode: SortingMode,
                                   reverseOrder: Boolean,
-                                  foldersFirst: Boolean): ExtensibleSortingComparator<SortableFSItem, DirItem> {
+                                  foldersFirst: Boolean): ExtensibleSortingComparator<SortableFSItem> {
         return when(sortingMode) {
             SortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
             SortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun joinListToString(list: List<SortableFSItem>): String {
         return list.joinToString(separator = "\n", transform = { fsItem ->
             fsItem.name.let { name ->
-                if (fsItem.isDir) "$folderCharacter $name (${(fsItem as DirItem).itemsCount} элементов)"
+                if (fsItem.isDir) "$folderCharacter $name"
                 else "$fileCharacter $name (${fsItem.size} байт)"
             }
         })

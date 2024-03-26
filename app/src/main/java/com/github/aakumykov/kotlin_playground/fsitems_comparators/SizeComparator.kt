@@ -1,6 +1,4 @@
-package com.github.aakumykov.kotlin_playground.comparators
-
-import com.github.aakumykov.kotlin_playground.SortableFSItem
+package com.github.aakumykov.kotlin_playground.fsitems_comparators
 
 class SizeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : BasicComparator(reverseOrder, foldersFirst) {
 

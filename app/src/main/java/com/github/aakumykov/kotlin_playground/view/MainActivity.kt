@@ -1,15 +1,17 @@
-package com.github.aakumykov.kotlin_playground
+package com.github.aakumykov.kotlin_playground.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.aakumykov.kotlin_playground.comparators.DummyComparator
-import com.github.aakumykov.kotlin_playground.comparators.NameComparator
-import com.github.aakumykov.kotlin_playground.comparators.SizeComparator
-import com.github.aakumykov.kotlin_playground.comparators.TimeComparator
+import com.github.aakumykov.kotlin_playground.R
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
+import com.github.aakumykov.kotlin_playground.extensible_sorting_comparator.ExtensibleSortingComparator
 import com.github.aakumykov.kotlin_playground.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.fs_items.FileItem
-import com.github.aakumykov.kotlin_playground.sorting_comparator.ExtensibleSortingComparator
+import com.github.aakumykov.kotlin_playground.fsitems_comparators.DummyComparator
+import com.github.aakumykov.kotlin_playground.fsitems_comparators.NameComparator
+import com.github.aakumykov.kotlin_playground.fsitems_comparators.SizeComparator
+import com.github.aakumykov.kotlin_playground.fsitems_comparators.SortableFSItem
+import com.github.aakumykov.kotlin_playground.fsitems_comparators.TimeComparator
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground.sorting_comparator
+package com.github.aakumykov.kotlin_playground.extensible_sorting_comparator
 
 import android.util.Log
 

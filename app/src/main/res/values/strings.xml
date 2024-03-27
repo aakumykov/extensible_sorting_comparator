@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Песочница Kotlin</string>
+    <string name="app_name">Extensible sorting comparator</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="by_name">By name</string>
+    <string name="by_size">By size</string>
+    <string name="by_time">By time</string>
+    <string name="folders_first">Folders first</string>
+    <string name="direct_order">Direct order</string>
+    <string name="reverse_order">Reverse order</string>
+    <string name="tools_list_output">List output</string>
 </resources>

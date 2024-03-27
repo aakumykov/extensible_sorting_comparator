@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Расширяемый компаратор списка</string>
+    <string name="sort_by">Сортировать по:</string>
+    <string name="by_name">Имени</string>
+    <string name="by_size">Размеру</string>
+    <string name="by_time">Времени</string>
+    <string name="folders_first">Сначала каталоги</string>
+    <string name="direct_order">Прямой порядок</string>
+    <string name="reverse_order">Обратный порядок</string>
+    <string name="tools_list_output">Вывод списка</string>
+</resources>

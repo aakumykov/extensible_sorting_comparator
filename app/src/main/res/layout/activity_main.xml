@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Сортировать по:"
+            android:text="@string/sort_by"
             android:textStyle="bold"
             android:textColor="@color/design_default_color_primary_dark"/>
 
@@ -24,27 +24,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Имени" />
+            android:text="@string/by_name" />
 
         <RadioButton
             android:id="@+id/sortBySize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Размеру" />
+            android:text="@string/by_size" />
 
         <RadioButton
             android:id="@+id/sortByTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Времени" />
+            android:text="@string/by_time" />
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/foldersFirstSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="14dp"
             android:checked="true"
-            android:text="Сначала каталоги" />
+            android:text="@string/folders_first" />
 
         <ToggleButton
             android:id="@+id/reverseOrderSwitch"
@@ -52,8 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:checked="false"
-            android:textOff="Прямой порядок"
-            android:textOn="Обратный порядок" />
+            android:textOff="@string/direct_order"
+            android:textOn="@string/reverse_order" />
 
     </RadioGroup>
 
@@ -73,7 +73,7 @@
                 android:padding="6dp"
                 android:textSize="20sp"
                 android:typeface="serif"
-                tools:text="Вывод списка" />
+                tools:text="@string/tools_list_output" />
         </LinearLayout>
     </ScrollView>
 

@@ -16,5 +16,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "kotlin_playground"
+rootProject.name = "extensible_sorting_comparator"
 include ':app'

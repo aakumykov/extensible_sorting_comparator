@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground.extensions
+package com.github.aakumykov.extensible_sorting_comparator.extensions
 
 import android.app.Activity
 import android.widget.Toast

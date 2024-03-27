@@ -1,6 +1,6 @@
-package com.github.aakumykov.kotlin_playground.fs_items_comparators
+package com.github.aakumykov.extensible_sorting_comparator.fs_items_comparators
 
-import com.github.aakumykov.kotlin_playground.extensible_sorting_comparator.ExtensibleSortingComparator
+import com.github.aakumykov.extensible_sorting_comparator.extensible_sorting_comparator.ExtensibleSortingComparator
 
 abstract class BasicComparator(reverseOrder: Boolean, priorityItemsFirst: Boolean)
     : ExtensibleSortingComparator<SortableFSItem>(reverseOrder, priorityItemsFirst)

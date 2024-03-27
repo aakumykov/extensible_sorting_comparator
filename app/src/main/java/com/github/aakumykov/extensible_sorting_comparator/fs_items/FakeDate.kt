@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground.fs_items
+package com.github.aakumykov.extensible_sorting_comparator.fs_items
 
 import android.text.format.DateUtils
 import java.util.Date

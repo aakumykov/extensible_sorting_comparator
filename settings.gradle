@@ -18,3 +18,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "extensible_sorting_comparator"
 include ':app'
+include ':lib'

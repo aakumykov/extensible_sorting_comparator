@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.extensible_sorting_comparator.R
 import com.github.aakumykov.extensible_sorting_comparator.databinding.ActivityMainBinding
-import com.github.aakumykov.extensible_sorting_comparator.extensible_sorting_comparator.ExtensibleSortingComparator
 import com.github.aakumykov.extensible_sorting_comparator.fs_items.DirItem
 import com.github.aakumykov.extensible_sorting_comparator.fs_items.FileItem
 import com.github.aakumykov.extensible_sorting_comparator.fs_items_comparators.DummyComparator
@@ -12,18 +11,24 @@ import com.github.aakumykov.extensible_sorting_comparator.fs_items_comparators.N
 import com.github.aakumykov.extensible_sorting_comparator.fs_items_comparators.SizeComparator
 import com.github.aakumykov.extensible_sorting_comparator.fs_items_comparators.SortableFSItem
 import com.github.aakumykov.extensible_sorting_comparator.fs_items_comparators.TimeComparator
+import com.github.javafaker.Faker
+import java.util.Locale
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
     private val list: List<SortableFSItem> by lazy { listOf(
-            DirItem("Папка 1"),
-            FileItem("Файл Б", 4),
-            FileItem("Файл А", 3),
-            DirItem("Папка 2"),
-            DirItem("А1"),
-            FileItem("А2",5)
+            DirItem(randomName()),
+            FileItem(randomName(), randomSize()),
+            FileItem(randomName(), randomSize()),
+            DirItem(randomName()),
+            DirItem(randomName()),
+            FileItem(randomName(),randomSize())
     )}
 
+    private fun randomName(): String = faker.animal().name().capitalize()
+    private fun randomSize(): Int = Random.nextInt(10)
+    private val faker: Faker = Faker(Locale.getDefault())
     private val folderCharacter = "\uD83D\uDCC1"
     private val fileCharacter = "\uD83D\uDCC4"
     private lateinit var binding: ActivityMainBinding
@@ -52,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun sortingComparator(sortingMode: SortingMode,
                                   reverseOrder: Boolean,
-                                  foldersFirst: Boolean): ExtensibleSortingComparator<SortableFSItem> {
+                                  foldersFirst: Boolean): com.github.aakumykov.extensible_sorting_comparator.ExtensibleSortingComparator<SortableFSItem> {
         return when(sortingMode) {
             SortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
             SortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)

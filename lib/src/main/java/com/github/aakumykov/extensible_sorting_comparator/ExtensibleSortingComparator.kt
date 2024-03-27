@@ -1,4 +1,4 @@
-package com.github.aakumykov.extensible_sorting_comparator.extensible_sorting_comparator
+package com.github.aakumykov.extensible_sorting_comparator
 
 import android.util.Log
 

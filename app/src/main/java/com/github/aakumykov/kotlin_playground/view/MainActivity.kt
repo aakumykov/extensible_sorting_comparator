@@ -7,11 +7,11 @@ import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensible_sorting_comparator.ExtensibleSortingComparator
 import com.github.aakumykov.kotlin_playground.fs_items.DirItem
 import com.github.aakumykov.kotlin_playground.fs_items.FileItem
-import com.github.aakumykov.kotlin_playground.fsitems_comparators.DummyComparator
-import com.github.aakumykov.kotlin_playground.fsitems_comparators.NameComparator
-import com.github.aakumykov.kotlin_playground.fsitems_comparators.SizeComparator
-import com.github.aakumykov.kotlin_playground.fsitems_comparators.SortableFSItem
-import com.github.aakumykov.kotlin_playground.fsitems_comparators.TimeComparator
+import com.github.aakumykov.kotlin_playground.fs_items_comparators.DummyComparator
+import com.github.aakumykov.kotlin_playground.fs_items_comparators.NameComparator
+import com.github.aakumykov.kotlin_playground.fs_items_comparators.SizeComparator
+import com.github.aakumykov.kotlin_playground.fs_items_comparators.SortableFSItem
+import com.github.aakumykov.kotlin_playground.fs_items_comparators.TimeComparator
 
 class MainActivity : AppCompatActivity() {
 

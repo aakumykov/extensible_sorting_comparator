@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground.fsitems_comparators
+package com.github.aakumykov.kotlin_playground.fs_items_comparators
 
 class TimeComparator(reverseOrder: Boolean, foldersFirst: Boolean) : BasicComparator(reverseOrder, foldersFirst) {
     override fun compareItems(item1: SortableFSItem, item2: SortableFSItem): Int {

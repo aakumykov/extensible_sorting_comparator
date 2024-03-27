@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground.fsitems_comparators
+package com.github.aakumykov.kotlin_playground.fs_items_comparators
 
 import com.github.aakumykov.kotlin_playground.extensible_sorting_comparator.ExtensibleSortingComparator
 

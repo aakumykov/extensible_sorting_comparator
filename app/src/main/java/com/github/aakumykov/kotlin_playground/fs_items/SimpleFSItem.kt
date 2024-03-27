@@ -1,6 +1,6 @@
 package com.github.aakumykov.kotlin_playground.fs_items
 
-import com.github.aakumykov.kotlin_playground.fsitems_comparators.SortableFSItem
+import com.github.aakumykov.kotlin_playground.fs_items_comparators.SortableFSItem
 
 abstract class SimpleFSItem(
     override val isDir: Boolean,

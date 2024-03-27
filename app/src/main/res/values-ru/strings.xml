@@ -9,4 +9,5 @@
     <string name="direct_order">Прямой порядок</string>
     <string name="reverse_order">Обратный порядок</string>
     <string name="tools_list_output">Вывод списка</string>
+    <string name="bytes">байт</string>
 </resources>

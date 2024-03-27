@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             FileItem(randomName(),randomSize())
     )}
 
-    private fun randomName(): String = faker.animal().name().capitalize()
+    private fun randomName(): String = faker.animal().name().replaceFirstChar { c -> c.uppercaseChar() }
     private fun randomSize(): Int = Random.nextInt(10)
     private val faker: Faker = Faker(Locale.getDefault())
     private val folderCharacter = "\uD83D\uDCC1"
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         return list.joinToString(separator = "\n", transform = { fsItem ->
             fsItem.name.let { name ->
                 if (fsItem.isDir) "$folderCharacter $name"
-                else "$fileCharacter $name (${fsItem.size} байт)"
+                else "$fileCharacter $name (${fsItem.size} ${getString(R.string.bytes)})"
             }
         })
     }

@@ -8,4 +8,5 @@
     <string name="direct_order">Direct order</string>
     <string name="reverse_order">Reverse order</string>
     <string name="tools_list_output">List output</string>
+    <string name="bytes">byte</string>
 </resources>

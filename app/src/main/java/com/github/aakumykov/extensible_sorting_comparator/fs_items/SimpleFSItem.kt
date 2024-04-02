@@ -5,7 +5,7 @@ import com.github.aakumykov.extensible_sorting_comparator.fs_items_comparators.S
 abstract class SimpleFSItem(
     override val isDir: Boolean,
     override val name: String,
-    override val size: Int,
+    override val size: Long,
     override val time: Long = fakeDate()
 )
     : FSItem, SortableFSItem

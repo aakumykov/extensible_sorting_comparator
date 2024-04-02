@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     )}
 
     private fun randomName(): String = faker.animal().name().replaceFirstChar { c -> c.uppercaseChar() }
-    private fun randomSize(): Int = Random.nextInt(10)
+    private fun randomSize(): Long = Random.nextLong(10)
     private val faker: Faker = Faker(Locale.getDefault())
     private val folderCharacter = "\uD83D\uDCC1"
     private val fileCharacter = "\uD83D\uDCC4"

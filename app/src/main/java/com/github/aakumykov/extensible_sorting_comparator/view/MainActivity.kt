@@ -2,6 +2,7 @@ package com.github.aakumykov.extensible_sorting_comparator.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.github.aakumykov.extensible_sorting_comparator.ExtensibleSortingComparator
 import com.github.aakumykov.extensible_sorting_comparator.R
 import com.github.aakumykov.extensible_sorting_comparator.databinding.ActivityMainBinding
 import com.github.aakumykov.extensible_sorting_comparator.fs_items.DirItem
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun sortingComparator(sortingMode: SortingMode,
                                   reverseOrder: Boolean,
-                                  foldersFirst: Boolean): com.github.aakumykov.extensible_sorting_comparator.ExtensibleSortingComparator<SortableFSItem> {
+                                  foldersFirst: Boolean): ExtensibleSortingComparator<SortableFSItem> {
         return when(sortingMode) {
             SortingMode.NAME -> NameComparator(reverseOrder, foldersFirst)
             SortingMode.TIME -> TimeComparator(reverseOrder, foldersFirst)
